@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Aire - Virtual Mock Interview Bot</title>
+    <h1>Aire - Virtual Mock Interview Bot</h1>
   </head>
   <body>
     <h1>Aire</h1>
