@@ -19,7 +19,7 @@ const Aire = () => {
     if (input.trim) {
       setChat([...chat, { role: 'user', content: input }]);
       setInput('');
-      const response = await fetch('http://localhost:8000/api/chat', {
+      const response = await fetch('https://codexxx-kiyn.onrender.com/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
