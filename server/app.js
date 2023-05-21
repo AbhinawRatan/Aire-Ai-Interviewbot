@@ -16,10 +16,9 @@ app.post('/api/chat', async (req, res) => {
   const { messages } = req.body;
   const data = {
     model: 'gpt-3.5-turbo',
-    stream: true,
+    stream: false, // Disable streaming
     stop: ['\n', '[DONE]'],
     temperature: 0.9,
-
     messages: [
       {
         role: 'system',
@@ -33,6 +32,7 @@ app.post('/api/chat', async (req, res) => {
       },
     ],
   };
+
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -42,30 +42,20 @@ app.post('/api/chat', async (req, res) => {
       },
       body: JSON.stringify({
         ...data,
-        messages:[
-          ...data.messages,
-          ...messages,  
-        ]
+        messages: [...data.messages, ...messages],
       }),
     });
-    response.body.on('data', data => {
-      const lines = data.toString().split('\n').filter((line) => line.trim() !== '');
-      for (const line of lines) {
-        const message = line.replace(/^data: /, '');
-        if (message === '[DONE]') {
-          return res.end();
-        }
-        const { choices } = JSON.parse(message);
-        const { content } = choices[0].delta || {};
 
-        if (content) {
-          res.write(content);
-        }
+    const responseData = await response.json();
 
-      }
-    })
+    // Extract assistant responses from the choices array
+    const assistantResponses = responseData.choices && responseData.choices.length > 0
+      ? responseData.choices.map((choice) => choice.message.content.replace(/\\/g, '').replace(/"/g, '').replace(/^assistantResponse:\s*/, ''))
+      : [];
+    res.json(assistantResponses);
   } catch (error) {
-    console.log(error, 'error');
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
 
@@ -84,18 +74,18 @@ app.post('/api/title', async (req, res) => {
         max_tokens: 100,
         temperature: 0.7,
         n: 1,
-      })
-    })
+      }),
+    });
 
     const data = await response.json();
     console.log(data, 'data');
     res.status(200).json({ title: data?.choices?.[0]?.text });
   } catch (error) {
     console.log(error, 'error');
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
 
-const server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-server.timeout = 3000000; // Set the server timeout to 3000000 milliseconds (50 minutes)
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
