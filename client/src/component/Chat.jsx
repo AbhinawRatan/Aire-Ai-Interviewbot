@@ -74,7 +74,7 @@ const Aire = () => {
 
   const handlePlaySpeech = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.4;
+    utterance.rate = 2.5;
     speechSynthesis.speak(utterance);
   };
   
