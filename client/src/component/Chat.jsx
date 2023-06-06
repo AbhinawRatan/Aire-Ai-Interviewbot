@@ -45,7 +45,7 @@ const Aire = () => {
       }
 
       if (!title) {
-        const createTitle = await fetch('http://localhost:8000/api/title', {
+        const createTitle = await fetch('https://codexxx-kiyn.onrender.com/api/title', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
