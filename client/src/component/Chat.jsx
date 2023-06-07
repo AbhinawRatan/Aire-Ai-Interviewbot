@@ -1,4 +1,5 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
+import ScrollableFeed from 'react-scrollable-feed';
 
 const examples = [
   'Can you please tell me more about the company culture and work environment?',
@@ -13,8 +14,7 @@ const Aire = () => {
   const [input, setInput] = useState('');
   const [title, setTitle] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-
- 
+  
   const handleSend = async () => {
     if (input.trim) {
       setChat([...chat, { role: 'user', content: input }]);
@@ -41,7 +41,7 @@ const Aire = () => {
           break;
         }
         aiRes += value;
-        setChat([...chat, { role: 'user', content: input, }, { role: 'assistant', content: aiRes }]);
+        setChat([...chat, { role: 'user', content: input }, { role: 'assistant', content: aiRes }]);
       }
 
       if (!title) {
@@ -58,14 +58,13 @@ const Aire = () => {
         const title = await createTitle.json();
         setTitle(title?.title);
         setChatHistory([...chatHistory, title]);
-       
       }
     }
   }
 
   return (
     <div className="h-screen w-screen flex bg-[#050509] body">
-      <div className="w-[20%] h-screen bg-[#0c0c15] text-white p-4 overflow-y-hidden hide-scroll gradient-04 glassmorphism-2" onClick={()=> {
+      <div className="w-[20%] h-screen bg-[#0c0c15] text-white p-4 overflow-y-hidden hide-scroll  glassmorphism" onClick={()=> {
         setChat ([]);
         setTitle('');
       }}>
@@ -124,9 +123,13 @@ const Aire = () => {
           </div>
         </div>
       </div>
+    
       <div className="w-[80%] gradient-05">
+        
+    
         {chat.length > 0 ? (
-          <div className="h-[80%] overflow-scroll hide-scroll-bar text-white pt-8">
+          <div className="h-[80%] overflow-scroll hide-scroll-bar text-white pt-8" id="autoscrollDiv">
+           
             {chat.map((item, index) => (
                     <div className={` w-[60%] mx-auto p-6 text-white flex ${item.role === 'assistant' && 'bg-slate-900 rounded'}`}>
                     <span className='mr-8 p-2 bg-slate-500 rounded-full h-full'>
@@ -169,14 +172,23 @@ const Aire = () => {
                       <path d="M14.5 9h.01"></path>
                       <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
                     </svg>
+                    
                   )}
+                  
+                  
+                  
                 </span>
-                <div className='leading-loose'style={{ whiteSpace: 'break-spaces' }}>{item.content}</div>
+                <div className='leading-loose'style={{ whiteSpace: 'break-spaces' }}>{item.content}
+                </div>
               </div>
-            ))}
+
+            ))
+ 
+            }
+
           </div>
         ) : (
-          <div className="h-[80%]  flex flex-col justify-center items-center text-white gradient-04 ">
+          <div className="h-[80%]  flex flex-col justify-center items-center text-white gradient-04">
             <div className="text-4xl font-bold mb-8">Aire</div>
             <div className=" flex flex-wrap justify-around max-w-[900px]">
               {examples.map((item, index) => (
@@ -187,16 +199,17 @@ const Aire = () => {
               ))}
             </div>
           </div>
+          
         )}
-
+        
         <div className=" h-[20%] ">
-          <div className=" flex flex-col items-center justify-center w-full h-full text-white ">
-            <div className=" w-[60%] flex justify-center relative ">
+          <div className=" flex flex-col items-center justify-center w-full h-full text-white">
+            <div className=" w-[60%] flex justify-center relative">
             <input
               type="text"
                onChange={(e) => setInput(e.target.value)}
                  value ={input}
-               className=" w-full rounded-lg p-4 pr-16 bg-slate-800 text-white gradient-05 glasmorphism-2 "
+               className=" w-full rounded-lg p-4 pr-16 bg-slate-800 text-white"
               placeholder="Type your message here..."
              onKeyDown={(e) => {
     if (e.key === "Enter") {
@@ -221,32 +234,6 @@ const Aire = () => {
                   <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4"></path>
                 </svg>
               </span>
-              {/* microphone-on 
-              <button className=' absolute top-4 cursor-pointer' style={{ left: '88%' }} onClick={() => {
-    startMic();
-    if (transcript.trim()) {
-      handleSend();
-    }
-  }}>
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-microphone" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M9 2m0 3a3 3 0 0 1 3 -3h0a3 3 0 0 1 3 3v5a3 3 0 0 1 -3 3h0a3 3 0 0 1 -3 -3z"></path>
-            <path d="M5 10a7 7 0 0 0 14 0"></path>
-             <path d="M8 21l8 0"></path>
-          <path d="M12 17l0 4"></path>
-</svg>
-              </button>
-             microphone-off 
-              <button className=' absolute top-4 cursor-pointer' style={{ left: '82%' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-microphone-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M3 3l18 18"></path>
-   <path d="M9 5a3 3 0 0 1 6 0v5a3 3 0 0 1 -.13 .874m-2 2a3 3 0 0 1 -3.87 -2.872v-1"></path>
-   <path d="M5 10a7 7 0 0 0 10.846 5.85m2 -2a6.967 6.967 0 0 0 1.152 -3.85"></path>
-   <path d="M8 21l8 0"></path>
-   <path d="M12 17l0 4"></path>
-</svg>
-              </button>*/}
             </div>
             <small className=" text-slate-500 mt-2">
               AI is still in beta testing.
