@@ -54,18 +54,11 @@ code {
 }
 
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: #060c1a;
+  box-shadow: 0 8px 32px 0 #090A1A;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-}
-.glassmorphism-2 {
-  background: #1e293b;
-  box-shadow: 0 8px 32px 0 rgba(2, 7, 75, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid #1e293b;
 }
 
 .gradient-03 {
@@ -81,13 +74,13 @@ code {
 }
 
 .gradient-05 {
-  background: linear-gradient(-53.13deg, rgba(45, 72, 152, 0.75), rgba(0, 0, 0, 0));
+  background: linear-gradient(-53.13deg, #162c5f, #00000000);
 }
 
 .gradient-04 {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.04) 0%,
+    rgba(65, 9, 154, 0.04) 0%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -134,4 +127,18 @@ code {
     #260b80 53.65%,
     #3c0251 100%
   );
+}
+.bg-blue-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+}
+.bg-discount-gradient {
+  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
 }
