@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ScrollableFeed from 'react-scrollable-feed';
 
 const examples = [
   'Can you please tell me more about the company culture and work environment?',
