@@ -19,7 +19,6 @@ app.post('/api/chat', async (req, res) => {
     stream: true,
     stop: ['\n', '[DONE]'],
     temperature: 0.9,
-
     messages: [
       {
         role: 'system',
@@ -33,6 +32,7 @@ app.post('/api/chat', async (req, res) => {
       },
     ],
   };
+
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -42,13 +42,11 @@ app.post('/api/chat', async (req, res) => {
       },
       body: JSON.stringify({
         ...data,
-        messages:[
-          ...data.messages,
-          ...messages,  
-        ]
+        messages: [...data.messages, ...messages],
       }),
     });
-    response.body.on('data', data => {
+
+    response.body.on('data', (data) => {
       const lines = data.toString().split('\n').filter((line) => line.trim() !== '');
       for (const line of lines) {
         const message = line.replace(/^data: /, '');
@@ -61,14 +59,13 @@ app.post('/api/chat', async (req, res) => {
         if (content) {
           res.write(content);
         }
-
       }
-    })
+    });
   } catch (error) {
-    console.log(error, 'error');
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
-
 app.post('/api/title', async (req, res) => {
   try {
     const { title } = req.body;
@@ -84,14 +81,19 @@ app.post('/api/title', async (req, res) => {
         max_tokens: 100,
         temperature: 0.7,
         n: 1,
-      })
-    })
+      }),
+    });
 
-    const data = await response.json();
-    console.log(data, 'data');
-    res.status(200).json({ title: data?.choices?.[0]?.text });
+    if (response.ok) {
+      const data = await response.json();
+      const title = data?.choices?.[0]?.text;
+      res.status(200).json({ title });
+    } else {
+      throw new Error('Failed to retrieve title');
+    }
   } catch (error) {
-    console.log(error, 'error');
+    console.log(error);
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
 
