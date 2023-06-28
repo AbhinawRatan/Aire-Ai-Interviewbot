@@ -6,7 +6,7 @@ import './header.css';
 const Header = () => (
   <div className="gpt3__header section__padding" id="home">
     <div className="gpt3__header-content">
-      <h1 className='gradient__text text-xl'>  Unleash your interview skills and Conquer <br />the Job Market</h1>
+      <h1 className='gradient__text text-xl'>  Unleash your interview skills to Conquer <br />the Job Market</h1>
       <p className='gradient__text2'>Interview preparation can be stressful and time-consuming. <br /> Aire provides a comprehensive suite of personalized tools <br /> to help you interview with confidence.</p>
 
       <div className="gpt3__header-content__input">
@@ -16,7 +16,7 @@ const Header = () => (
 
       <div className="gpt3__header-content__people">
         <img src={people} />
-        <p>1,600 people requested access a visit in last 24 hours</p>
+        <p>100+ people requested access till now</p>
       </div>
     </div>
 
