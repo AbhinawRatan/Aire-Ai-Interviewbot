@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from "../../src/logo.svg"
 
 const examples = [
   'Can you please tell me more about the company culture and work environment?',
@@ -9,15 +10,18 @@ const examples = [
 ];
 
 const Aire = () => {
-  const [chat, setChat] = useState([]);
-  const [input, setInput] = useState('');
-  const [title, setTitle] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chat, setChat] = useState([]); // State variable to store the chat history
+  const [input, setInput] = useState(''); // State variable to store the user's current input
+  const [title, setTitle] = useState(''); // State variable to store the title of the conversation
+  const [chatHistory, setChatHistory] = useState([]); // State variable to store the complete chat history
   
+  // Function to handle sending a message
   const handleSend = async () => {
     if (input.trim) {
-      setChat([...chat, { role: 'user', content: input }]);
-      setInput('');
+      setChat([...chat, { role: 'user', content: input }]); // Add user's message to the chat history
+      setInput(''); // Clear the input field
+
+      // Send a POST request to the chat API
       const response = await fetch('https://codexxx-kiyn.onrender.com/api/chat', {
         method: 'POST',
         headers: {
@@ -31,7 +35,7 @@ const Aire = () => {
         })
       });
 
-      //eslint-disable-next-line
+      // Read the response data from the API
       const readData = response.body.pipeThrough(new TextDecoderStream()).getReader();
       let aiRes = '';
       while (true) {
@@ -40,10 +44,11 @@ const Aire = () => {
           break;
         }
         aiRes += value;
-        setChat([...chat, { role: 'user', content: input }, { role: 'assistant', content: aiRes }]);
+        setChat([...chat, { role: 'user', content: input }, { role: 'assistant', content: aiRes }]); // Add user and assistant messages to the chat history
       }
 
       if (!title) {
+        // If the title is not set, send a POST request to the title API
         const createTitle = await fetch('https://codexxx-kiyn.onrender.com/api/title', {
           method: 'POST',
           headers: {
@@ -188,8 +193,9 @@ const Aire = () => {
           </div>
         ) : (
           <div className="h-[80%]  flex flex-col justify-center items-center text-white gradient-04">
-            <div className="text-4xl font-bold mb-8">Aire</div>
-            <div className=" flex flex-wrap justify-around max-w-[900px]">
+ <div className="">
+          <img src={logo} />
+        </div>            <div className=" flex flex-wrap justify-around max-w-[900px]">
               {examples.map((item, index) => (
                 <div className="text-lg font-light mt-4 p-4  rounded cursor-pointer hover:bg-slate-800 min-[400px]"
                  onClick={() => setInput(item)}>
