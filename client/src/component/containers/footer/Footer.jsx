@@ -9,7 +9,7 @@ const Footer = () => (
     </div>
 
     <div className="gpt3__footer-btn">
-      <p>Request Early Access</p>
+      <p>Aire - The Interview Bot</p>
     </div>
 
     <div className="gpt3__footer-links">
@@ -34,6 +34,7 @@ const Footer = () => (
         <h4>Get in touch</h4>
         <p>ratanabhinaw@gmail.com</p>
         <p>+917523817665</p>
+        <p>abhinaw.live</p>
       </div>
     </div>
 

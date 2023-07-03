@@ -1,8 +1,9 @@
+import React from 'react';
 import './App.css';
 import Aire from './component/Chat';
 import Home from './component/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/Aire' element={<Aire />} />
         </Routes>
-       </Router>
+      </Router>
+      <Analytics/>
     </div>
   );
 }

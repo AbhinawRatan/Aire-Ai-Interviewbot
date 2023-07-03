@@ -30,6 +30,9 @@ const Navbar = () => {
         </div>
       </div>
       <div className="gpt3__navbar-sign">
+        {isAuthenticated && <p>
+          {user.name}
+        </p> }
         {isAuthenticated ? (
           <div className="flex">
             <p
@@ -69,21 +72,34 @@ const Navbar = () => {
                 <a href="#home">Home</a>
               </p>
               <p>
-                <a href="#wgpt3">What is GPT3?</a>
+                <a href="#wgpt3">What is Aire?</a>
               </p>
               <p>
-                <a href="#possibility">Open AI</a>
+                <a href="#possibility">Possibilites</a>
               </p>
               <p>
-                <a href="#features">Case Studies</a>
+                <a href="#features">Introduction</a>
               </p>
-              <p>
-                <a href="#blog">Library</a>
-              </p>
+            
             </div>
             <div className="gpt3__navbar-menu_container-links-sign">
-              <p>Sign in</p>
-              <button type="button">Sign up</button>
+            {isAuthenticated ? (
+          <div className="flex">
+            <p
+              className="mr-2 cursor-pointer py-3"
+              onClick={() =>
+                logout({ logoutParams: { returnTo: window.location.origin } })
+              }
+            >
+              Log Out
+            </p>
+            <button>
+              <NavLink to="/Aire">Let's Start</NavLink>
+            </button>
+          </div>
+        ) : (
+          <button onClick={() => loginWithRedirect()}>Log In</button>
+        )}
             </div>
           </div>
         )}
