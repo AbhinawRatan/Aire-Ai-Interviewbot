@@ -22,7 +22,7 @@ const Aire = () => {
       setInput(''); // Clear the input field
 
       // Send a POST request to the chat API
-      const response = await fetch('https://codexxx-kiyn.onrender.com', {
+      const response = await fetch('https://codexxx-kiyn.onrender.com/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
