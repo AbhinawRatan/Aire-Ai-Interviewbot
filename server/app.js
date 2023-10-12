@@ -18,7 +18,7 @@ app.post('/api/chat', async (req, res) => {
     model: 'gpt-3.5-turbo',
     stream: true,
     stop: ['\n', '[DONE]'],
-    temperature: 0.9,
+    temperature: 0.5,
     messages: [
       {
         role: 'system',
