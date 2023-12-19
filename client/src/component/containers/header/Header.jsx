@@ -7,7 +7,6 @@ const Header = () => (
   <div className="gpt3__header section__padding" id="home">
     <div className="gpt3__header-content">
       <h1 className='gradient__text text-xl'>  Enhance your interview skills and Conquer <br />the Job Market</h1>
-      <p className='gradient__text2'>Interview preparation can be stressful and time-consuming. <br /> Aire provides a comprehensive suite of personalized tools <br /> to help you interview with confidence.</p>
 
       <div className="gpt3__header-content__input">
         <input type="email" placeholder="Your Email Address" />

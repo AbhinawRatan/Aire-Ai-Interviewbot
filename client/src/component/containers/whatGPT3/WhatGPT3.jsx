@@ -5,15 +5,15 @@ import './whatGPT3.css';
 const WhatGPT3 = () => (
   <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
     <div className="gpt3__whatgpt3-feature">
-      <Feature title="What is Aire" text="Aire is a revolutionary platform that combines the power of OpenAI's ChatGPT 3.5 and Langchain to provide a seamless, real-time interview experience. Elevate your skills, engage dynamically, and unlock your potential with Aire's cutting-edge technology." />
+      <Feature title="What is Aire" text="Aire transforms the way businesses conduct interviews. Our platform streamlines the interview process, providing a seamless experience that saves time and resources. With Aire, you can elevate your hiring strategy, uncover true talent, and make data-driven decisions." />
     </div>
     <div className="gpt3__whatgpt3-heading">
       <h1 className="gradient__text">The possibilities are beyond your imagination</h1>
     </div>
     <div className="gpt3__whatgpt3-container">
-      <Feature title="OpenAI" text="Our website leverages the power of OpenAI to deliver an exceptional interview preparation platform, empowering users to enhance their skills and excel in job interviews." />
-      <Feature title="Pinecone" text="Pinecone powers the intelligent search capabilities on our website, enabling users to efficiently navigate through vast interview question databases with lightning-fast results" />
-      <Feature title="GPT 3.5" text="ChatGPT 3.5 Turbo drives the interactive conversation experience on our website, allowing users to engage in dynamic and natural interview simulations with intelligent responses." />
+      <Feature title=" Interview Solutions" text="Our advanced interview platform is designed to cater to the unique needs of different corporate sectors. Whether it’s tech, finance, healthcare, or education, Aire provides tailored interview scenarios that resonate with your industry’s standards and requirements" />
+      <Feature title="Candidate Engagement" text="Engage candidates with a dynamic interview experience that goes beyond traditional methods. Aire’s platform fosters a two-way interaction, allowing for a more in-depth understanding of the candidate's capabilities and fit for your corporate culture." />
+      <Feature title="Insightful Analytics" text="Make informed hiring decisions with Aire’s comprehensive analytics. Gain insights into candidate performance, strengths, and areas for improvement. Our analytics help you identify the ideal candidates for your organization." />
     </div>
   </div>
 );

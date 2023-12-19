@@ -44,7 +44,7 @@ const Navbar = () => {
               Log Out
             </p>
             <button>
-              <NavLink to="/Aire">Let's Start</NavLink>
+              <NavLink to="/Aire">Demo</NavLink>
             </button>
           </div>
         ) : (

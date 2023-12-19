@@ -14,7 +14,6 @@ const Home = () => (
       <Navbar />
       <Header />
     </div>
-    <Brand />
     <WhatGPT3 />
     <Features />
     <Possibility />
