@@ -5,11 +5,28 @@ import "./navbar.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 
+// Assuming Verisoul SDK is loaded globally as per your index.html inclusion
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const { loginWithRedirect } = useAuth0();
-  const { logout } = useAuth0();
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
+
+  const handleLogin = () => {
+    loginWithRedirect();
+  };
+
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+    // Reset Verisoul session upon logout
+    if (window.Verisoul) {
+      window.Verisoul.reinitialize();
+    }
+  };
+
+  // Authenticate Verisoul session after login
+  if (isAuthenticated && window.Verisoul) {
+    window.Verisoul.account({ accountId: user.sub }); // user.sub is typically used as a unique identifier
+  }
+
 
   return (
     <div className="gpt3__navbar">
